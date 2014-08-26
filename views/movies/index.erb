@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>A list of movies in our database</title>
+    <link rel="stylesheet" href="home.css" />
+  </head>
+
+  <body>
+
+ <form action="/movies" method="get">
+  <input type="search" name="query">
+  <input type="submit" value="Search">
+</form>
+
+<ul class="page-links">
+  <% if !params[:order]  && !params[:query] %>
+    <% if @page != 1 %>
+      <li><a href="/movies?page=<%= @page - 1 %>">Previous</a></li>
+    <% end %>
+
+    <li><a href="/movies?page=<%= @page + 1 %>">Next</a></li>
+  <% elsif params[:order]  && !params[:query] %>
+    <% if @page != 1 %>
+      <li><a href="/movies?order=<%= params[:order] %>&page=<%= @page - 1 %>">Previous</a></li>
+    <% end %>
+
+    <li><a href="/movies?order=<%= params[:order] %>&page=<%= @page + 1 %>">Next</a></li>
+  <% elsif !params[:order]  && params[:query] %>
+    <% if @page != 1 %>
+      <li><a href="/movies?query=<%= params[:query] %>&page=<%= @page - 1 %>">Previous</a></li>
+    <% end %>
+
+    <li><a href="/movies?query=<%= params[:query] %>&page=<%= @page + 1 %>">Next</a></li>
+  <% else %>
+    <% if @page != 1 %>
+      <li><a href="/movies?order=<%= params[:order] %>&query=<%= params[:query] %>&page=<%= @page - 1 %>">Previous</a></li>
+    <% end %>
+
+    <li><a href="/movies?order=<%= params[:order] %>&query=<%= params[:query] %>&page=<%= @page + 1 %>">Next</a></li>
+  <% end %>
+
+</ul>
+
+
+<table>
+  <thead>
+    <tr>
+      <th><a href="/movies?order=movies.title">Title</a></th>
+      <th><a href="/movies?order=movies.year">Year</a></th>
+      <th><a href="/movies?order=movies.rating">Rating</a></th>
+      <th><a href="/movies?order=studios.name">Studio</a></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @result.each do |movie| %>
+      <tr>
+        <td><a href="/movies/<%=movie["title"]%>"><%= movie["title"]%></a></td>
+        <td><%= movie["year"] %></td>
+        <td><%= movie["rating"] %></td>
+        <td><%= movie["name"] %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+
+
+  </body>
+</html>
+
+

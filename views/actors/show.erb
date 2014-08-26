@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Actors</title>
+    <link rel="stylesheet" href="home.css" />
+  </head>
+
+  <body>
+
+  This is a list of movies that <%=@actor%> has starred in:<br><br>
+
+  <%@result.each do |movie|%>
+  <a href="/movies/<%=movie["title"]%>"><%= movie["title"]%></a><br>
+  <%end%>
+
+  </body>
+</html>

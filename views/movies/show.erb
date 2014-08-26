@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Movies</title>
+    <link rel="stylesheet" href="home.css" />
+  </head>
+
+  <body>
+
+  Here's some more information on <%=@movie["name"]%>:<br><br>
+
+  Genre: <%=@result_genre[0]["name"]%><br>
+  Studio: <%=@result_studio[0]["name"]%><br>
+
+  Here's a list of the actors and their roles in <%=@movie["name"]%>:<br><br>
+
+  <%@result.each do |actor|%>
+    <a href="/actors/<%=actor["name"]%>"><%=actor["name"]%></a> played the role of <%=actor["character"]%><br>
+  <%end%>
+
+  </body>
+</html>
